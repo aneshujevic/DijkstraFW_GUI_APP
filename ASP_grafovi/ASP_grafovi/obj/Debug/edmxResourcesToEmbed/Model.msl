@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="grafoviModelStoreContainer" CdmEntityContainer="grafoviEntities">
+    <EntitySetMapping Name="cvor">
+      <EntityTypeMapping TypeName="grafoviModel.cvor">
+        <MappingFragment StoreEntitySet="cvor">
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="posX" ColumnName="posX" />
+          <ScalarProperty Name="posY" ColumnName="posY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="konekcije">
+      <EntityTypeMapping TypeName="grafoviModel.konekcije">
+        <MappingFragment StoreEntitySet="konekcije">
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="startCvor" ColumnName="startCvor" />
+          <ScalarProperty Name="endCvor" ColumnName="endCvor" />
+          <ScalarProperty Name="tezina" ColumnName="tezina" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="korisnici">
+      <EntityTypeMapping TypeName="grafoviModel.korisnici">
+        <MappingFragment StoreEntitySet="korisnici">
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password1" ColumnName="password1" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

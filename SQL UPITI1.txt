@@ -1,0 +1,45 @@
+create table [grafovi].[dbo].[korisnici]
+(
+	username varchar(50) not null primary key,
+	password1 varchar(50) not null,
+);
+
+create table [grafovi].[dbo].[cvor]
+(
+	username varchar(50) not null,
+	id integer not null,
+	posX float not null,
+	posY float not null,
+);
+
+create table [grafovi].[dbo].[konekcije]
+(
+	username varchar(50) not null,
+	startCvor integer not null,
+	endCvor integer not null,
+	tezina float not null,
+);
+
+alter table [grafovi].[dbo].[konekcije]
+	add constraint fkKonekcije foreign key (username)
+		references [grafovi].[dbo].[korisnici](username);
+
+alter table [grafovi].[dbo].[cvor]
+	add constraint fkCvor foreign key (username)
+		references [grafovi].[dbo].[korisnici](username);
+
+alter table [grafovi].[dbo].[cvor]
+	add constraint pkCvor primary key (username, id);
+
+alter table  [grafovi].[dbo].[konekcije]
+	add constraint pkKonekcije
+		primary key(username, startCvor, endCvor);
+
+
+
+insert into [grafovi].[dbo].[korisnici]
+values ('admin', 'admin');
+
+insert into [grafovi].[dbo].[korisnici]
+values ('gost', 'gost');
+

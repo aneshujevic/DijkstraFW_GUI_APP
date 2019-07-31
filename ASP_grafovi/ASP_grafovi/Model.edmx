@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="grafoviModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="cvor">
+          <Key>
+            <PropertyRef Name="username" />
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="posX" Type="float" Nullable="false" />
+          <Property Name="posY" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="konekcije">
+          <Key>
+            <PropertyRef Name="username" />
+            <PropertyRef Name="startCvor" />
+            <PropertyRef Name="endCvor" />
+          </Key>
+          <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="startCvor" Type="int" Nullable="false" />
+          <Property Name="endCvor" Type="int" Nullable="false" />
+          <Property Name="tezina" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="korisnici">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password1" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="fkCvor">
+          <End Role="korisnici" Type="Self.korisnici" Multiplicity="1" />
+          <End Role="cvor" Type="Self.cvor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="korisnici">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="cvor">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fkKonekcije">
+          <End Role="korisnici" Type="Self.korisnici" Multiplicity="1" />
+          <End Role="konekcije" Type="Self.konekcije" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="korisnici">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="konekcije">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="grafoviModelStoreContainer">
+          <EntitySet Name="cvor" EntityType="Self.cvor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="konekcije" EntityType="Self.konekcije" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="korisnici" EntityType="Self.korisnici" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fkCvor" Association="Self.fkCvor">
+            <End Role="korisnici" EntitySet="korisnici" />
+            <End Role="cvor" EntitySet="cvor" />
+          </AssociationSet>
+          <AssociationSet Name="fkKonekcije" Association="Self.fkKonekcije">
+            <End Role="korisnici" EntitySet="korisnici" />
+            <End Role="konekcije" EntitySet="konekcije" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="grafoviModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="cvor">
+          <Key>
+            <PropertyRef Name="username" />
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="posX" Type="Double" Nullable="false" />
+          <Property Name="posY" Type="Double" Nullable="false" />
+          <NavigationProperty Name="korisnici" Relationship="Self.fkCvor" FromRole="cvor" ToRole="korisnici" />
+        </EntityType>
+        <EntityType Name="konekcije">
+          <Key>
+            <PropertyRef Name="username" />
+            <PropertyRef Name="startCvor" />
+            <PropertyRef Name="endCvor" />
+          </Key>
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="startCvor" Type="Int32" Nullable="false" />
+          <Property Name="endCvor" Type="Int32" Nullable="false" />
+          <Property Name="tezina" Type="Double" Nullable="false" />
+          <NavigationProperty Name="korisnici" Relationship="Self.fkKonekcije" FromRole="konekcije" ToRole="korisnici" />
+        </EntityType>
+        <EntityType Name="korisnici">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="cvor" Relationship="Self.fkCvor" FromRole="korisnici" ToRole="cvor" />
+          <NavigationProperty Name="konekcije" Relationship="Self.fkKonekcije" FromRole="korisnici" ToRole="konekcije" />
+        </EntityType>
+        <Association Name="fkCvor">
+          <End Role="korisnici" Type="Self.korisnici" Multiplicity="1" />
+          <End Role="cvor" Type="Self.cvor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="korisnici">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="cvor">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fkKonekcije">
+          <End Role="korisnici" Type="Self.korisnici" Multiplicity="1" />
+          <End Role="konekcije" Type="Self.konekcije" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="korisnici">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="konekcije">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="grafoviEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="cvor" EntityType="Self.cvor" />
+          <EntitySet Name="konekcije" EntityType="Self.konekcije" />
+          <EntitySet Name="korisnici" EntityType="Self.korisnici" />
+          <AssociationSet Name="fkCvor" Association="Self.fkCvor">
+            <End Role="korisnici" EntitySet="korisnici" />
+            <End Role="cvor" EntitySet="cvor" />
+          </AssociationSet>
+          <AssociationSet Name="fkKonekcije" Association="Self.fkKonekcije">
+            <End Role="korisnici" EntitySet="korisnici" />
+            <End Role="konekcije" EntitySet="konekcije" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="grafoviModelStoreContainer" CdmEntityContainer="grafoviEntities">
+          <EntitySetMapping Name="cvor">
+            <EntityTypeMapping TypeName="grafoviModel.cvor">
+              <MappingFragment StoreEntitySet="cvor">
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="posX" ColumnName="posX" />
+                <ScalarProperty Name="posY" ColumnName="posY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="konekcije">
+            <EntityTypeMapping TypeName="grafoviModel.konekcije">
+              <MappingFragment StoreEntitySet="konekcije">
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="startCvor" ColumnName="startCvor" />
+                <ScalarProperty Name="endCvor" ColumnName="endCvor" />
+                <ScalarProperty Name="tezina" ColumnName="tezina" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="korisnici">
+            <EntityTypeMapping TypeName="grafoviModel.korisnici">
+              <MappingFragment StoreEntitySet="korisnici">
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password1" ColumnName="password1" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

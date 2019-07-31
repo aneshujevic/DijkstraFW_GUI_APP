@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="grafoviModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="cvor">
+    <Key>
+      <PropertyRef Name="username" />
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="posX" Type="float" Nullable="false" />
+    <Property Name="posY" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="konekcije">
+    <Key>
+      <PropertyRef Name="username" />
+      <PropertyRef Name="startCvor" />
+      <PropertyRef Name="endCvor" />
+    </Key>
+    <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="startCvor" Type="int" Nullable="false" />
+    <Property Name="endCvor" Type="int" Nullable="false" />
+    <Property Name="tezina" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="korisnici">
+    <Key>
+      <PropertyRef Name="username" />
+    </Key>
+    <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="password1" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="fkCvor">
+    <End Role="korisnici" Type="Self.korisnici" Multiplicity="1" />
+    <End Role="cvor" Type="Self.cvor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="korisnici">
+        <PropertyRef Name="username" />
+      </Principal>
+      <Dependent Role="cvor">
+        <PropertyRef Name="username" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fkKonekcije">
+    <End Role="korisnici" Type="Self.korisnici" Multiplicity="1" />
+    <End Role="konekcije" Type="Self.konekcije" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="korisnici">
+        <PropertyRef Name="username" />
+      </Principal>
+      <Dependent Role="konekcije">
+        <PropertyRef Name="username" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="grafoviModelStoreContainer">
+    <EntitySet Name="cvor" EntityType="Self.cvor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="konekcije" EntityType="Self.konekcije" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="korisnici" EntityType="Self.korisnici" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="fkCvor" Association="Self.fkCvor">
+      <End Role="korisnici" EntitySet="korisnici" />
+      <End Role="cvor" EntitySet="cvor" />
+    </AssociationSet>
+    <AssociationSet Name="fkKonekcije" Association="Self.fkKonekcije">
+      <End Role="korisnici" EntitySet="korisnici" />
+      <End Role="konekcije" EntitySet="konekcije" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
