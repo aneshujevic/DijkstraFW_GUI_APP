@@ -26,8 +26,15 @@ namespace ASP_grafovi
         private void metroButton1_Click(object sender, EventArgs e)
         {
             korisnici x = null;
+
             try { x = ctx.korisnici.First(v => v.username == usernameInput.Text); }
             catch { MessageBox.Show("Ne postoji korisnik sa tim username."); return; }
+
+            if (passInput.Text.Length < 8)
+            {
+                MessageBox.Show("Polje za šifru ne sme biti prazno i mora imati makar 8 karaktera..");
+                return;
+            }
 
             if (x != null && x.password1 == passInput.Text)
             {
@@ -45,20 +52,8 @@ namespace ASP_grafovi
 
         private void metroButton2_Click(object sender, EventArgs e)
         {
-            var x = new korisnici();
-            x.username = usernameInput.Text;
-            x.password1 = usernameInput.Text;
-            if (!ctx.korisnici.Any(y => y.username == usernameInput.Text))
-            {
-                ctx.korisnici.Add(x);
-                MessageBox.Show("Uspešno registrovan korisnik!");
-                passInput.Clear();
-            } else {
-                MessageBox.Show("Već postoji korisnik sa datim imenom!"); passInput.Clear(); usernameInput.Clear();
-            }
-                    
-
-            ctx.SaveChanges();
+            RegisterForm registracija = new RegisterForm();
+            registracija.ShowDialog();
         }
     }
 }

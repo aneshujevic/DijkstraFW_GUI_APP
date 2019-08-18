@@ -24,6 +24,9 @@
     <EntitySetMapping Name="korisnici">
       <EntityTypeMapping TypeName="grafoviModel.korisnici">
         <MappingFragment StoreEntitySet="korisnici">
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="surname" ColumnName="surname" />
+          <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="username" ColumnName="username" />
           <ScalarProperty Name="password1" ColumnName="password1" />
         </MappingFragment>

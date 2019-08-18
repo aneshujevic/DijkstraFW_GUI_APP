@@ -56,36 +56,38 @@
             this.metroLabel2.AutoSize = true;
             this.metroLabel2.Location = new System.Drawing.Point(23, 41);
             this.metroLabel2.Name = "metroLabel2";
-            this.metroLabel2.Size = new System.Drawing.Size(68, 19);
+            this.metroLabel2.Size = new System.Drawing.Size(93, 19);
             this.metroLabel2.TabIndex = 1;
-            this.metroLabel2.Text = "Username";
+            this.metroLabel2.Text = "Korisničko ime";
             // 
             // metroLabel3
             // 
             this.metroLabel3.AutoSize = true;
             this.metroLabel3.Location = new System.Drawing.Point(23, 102);
             this.metroLabel3.Name = "metroLabel3";
-            this.metroLabel3.Size = new System.Drawing.Size(63, 19);
+            this.metroLabel3.Size = new System.Drawing.Size(35, 19);
             this.metroLabel3.TabIndex = 1;
-            this.metroLabel3.Text = "Password";
+            this.metroLabel3.Text = "Šifra";
             // 
             // metroButton2
             // 
-            this.metroButton2.Location = new System.Drawing.Point(58, 233);
+            this.metroButton2.FontSize = MetroFramework.MetroButtonSize.Medium;
+            this.metroButton2.Location = new System.Drawing.Point(23, 244);
             this.metroButton2.Name = "metroButton2";
-            this.metroButton2.Size = new System.Drawing.Size(174, 44);
+            this.metroButton2.Size = new System.Drawing.Size(240, 43);
             this.metroButton2.TabIndex = 2;
-            this.metroButton2.Text = "Register";
+            this.metroButton2.Text = "Registracija";
             this.metroButton2.UseSelectable = true;
             this.metroButton2.Click += new System.EventHandler(this.metroButton2_Click);
             // 
             // metroButton1
             // 
-            this.metroButton1.Location = new System.Drawing.Point(58, 164);
+            this.metroButton1.FontSize = MetroFramework.MetroButtonSize.Medium;
+            this.metroButton1.Location = new System.Drawing.Point(23, 164);
             this.metroButton1.Name = "metroButton1";
-            this.metroButton1.Size = new System.Drawing.Size(174, 44);
+            this.metroButton1.Size = new System.Drawing.Size(240, 63);
             this.metroButton1.TabIndex = 2;
-            this.metroButton1.Text = "Login";
+            this.metroButton1.Text = "Uloguj se";
             this.metroButton1.UseSelectable = true;
             this.metroButton1.Click += new System.EventHandler(this.metroButton1_Click);
             // 
@@ -93,14 +95,16 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(300, 300);
+            this.ClientSize = new System.Drawing.Size(287, 306);
             this.Controls.Add(this.metroButton1);
             this.Controls.Add(this.metroButton2);
             this.Controls.Add(this.metroLabel3);
             this.Controls.Add(this.metroLabel2);
             this.Controls.Add(this.passInput);
             this.Controls.Add(this.usernameInput);
+            this.MinimumSize = new System.Drawing.Size(287, 306);
             this.Name = "loginForm";
+            this.Resizable = false;
             this.ResumeLayout(false);
             this.PerformLayout();
 

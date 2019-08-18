@@ -26,6 +26,9 @@
       <PropertyRef Name="username" />
     </Key>
     <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="surname" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="password1" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <Association Name="fkCvor">

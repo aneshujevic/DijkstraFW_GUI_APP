@@ -23,6 +23,9 @@ namespace ASP_grafovi
     
         public string username { get; set; }
         public string password1 { get; set; }
+        public string name { get; set; }
+        public string surname { get; set; }
+        public string email { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<cvor> cvor { get; set; }

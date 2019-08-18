@@ -31,6 +31,9 @@
             <PropertyRef Name="username" />
           </Key>
           <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="surname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="password1" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <Association Name="fkCvor">
@@ -105,6 +108,9 @@
           <Property Name="password1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="cvor" Relationship="Self.fkCvor" FromRole="korisnici" ToRole="cvor" />
           <NavigationProperty Name="konekcije" Relationship="Self.fkKonekcije" FromRole="korisnici" ToRole="konekcije" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="surname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="fkCvor">
           <End Role="korisnici" Type="Self.korisnici" Multiplicity="1" />
@@ -172,6 +178,9 @@
           <EntitySetMapping Name="korisnici">
             <EntityTypeMapping TypeName="grafoviModel.korisnici">
               <MappingFragment StoreEntitySet="korisnici">
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="username" ColumnName="username" />
                 <ScalarProperty Name="password1" ColumnName="password1" />
               </MappingFragment>
@@ -198,6 +207,14 @@
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
-    <Diagrams></Diagrams>
+    <Diagrams>
+      <Diagram DiagramId="1486a02424b44b42bbed7930d8efa696" Name="Diagram1">
+        <EntityTypeShape EntityType="grafoviModel.cvor" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="grafoviModel.konekcije" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="grafoviModel.korisnici" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+        <AssociationConnector Association="grafoviModel.fkCvor" ManuallyRouted="false" />
+        <AssociationConnector Association="grafoviModel.fkKonekcije" ManuallyRouted="false" />
+      </Diagram>
+    </Diagrams>
   </Designer>
 </edmx:Edmx>
